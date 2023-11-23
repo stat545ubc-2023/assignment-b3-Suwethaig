@@ -2,6 +2,11 @@
 #install.packages("shinydashboard")
 #install.packages("DT")
 
+#The following features have been utilised in the shiny app:
+#Feature 1: Add an option to sort the table by one of your variables
+#Feature 2: Allow the user to download your table as a .csv file
+#Feature 3: Add an image to the UI
+
 #Loading the necessary packages for the app
 library(shiny)
 library(ggplot2)
@@ -57,11 +62,13 @@ ui <- fluidPage(
 # Server function
 server <- function(input, output) {
 
+
   #Filtering data based on the crop chosen by the user
   chosen_crop <- reactive({
     crop_data %>%
       filter(LABEL == input$crop_type)
   })
+
 
   #Displaying box plot of the chosen crop
   output$param_plot <- renderPlot({
@@ -72,11 +79,13 @@ server <- function(input, output) {
       coord_flip()
   })
 
+  #Feature 1
   #Sorted table showing all of the crop parameters
   output$param_table <- renderDT(
     chosen_crop(), options = list(searching = FALSE, pageLength = 10, lengthChange = FALSE),
   )
 
+  #Feature 2
   #Download button to download the csv file of the sorted table
   output$download_1 <- downloadHandler(
     filename = function() {
@@ -87,6 +96,7 @@ server <- function(input, output) {
     }
   )
 
+  #Feature 3
   #Image of the chosen crop in the side bar panel
   output$crop_img <- renderImage({
     list(src = file.path("www", paste0(input$crop_type, ".jpg")),
