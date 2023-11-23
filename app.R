@@ -4,8 +4,16 @@
 
 #The following features have been utilised in the shiny app:
 #Feature 1: Add an option to sort the table by one of your variables
+#The dataset contains multiple crops and information about their environmental conditions
+#In the shiny app, there is an input option to sort and get a table for the crop required by the user
+#Along with the table, box plot of the temperature data has also been displayed
+
 #Feature 2: Allow the user to download your table as a .csv file
+#Once sorted, the user can download the table for the respective crop as a csv file
+
 #Feature 3: Add an image to the UI
+#In order to add more clarity, a visual representation of the selected crop has been displayed
+#by adding an image to the side panel
 
 #Loading the necessary packages for the app
 library(shiny)
